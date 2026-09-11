@@ -60,7 +60,8 @@ class SanityAssets {
   }) async {
     validateAssetType(type.name);
     final dataset = _config.requireDataset();
-    final meta = extract == null ? null : (extract.isEmpty ? const ['none'] : extract);
+    final meta =
+        extract == null ? null : (extract.isEmpty ? const ['none'] : extract);
 
     final query = <String, String>{
       if (label != null) 'label': label,

@@ -1,0 +1,3 @@
+tags:
+  integration:
+    skip: "Hits the live Sanity API. Run with: dart test --tags integration --run-skipped"

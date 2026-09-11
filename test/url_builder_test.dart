@@ -20,7 +20,8 @@ void main() {
   });
 
   test('parses a file reference into a CDN filename', () {
-    const ref = SanityAssetRef('file-2a29e0f3f4b4c1e0d1a2b3c4d5e6f7a8b9c0d1e2-pdf');
+    const ref =
+        SanityAssetRef('file-2a29e0f3f4b4c1e0d1a2b3c4d5e6f7a8b9c0d1e2-pdf');
     expect(ref.fileFilename, '2a29e0f3f4b4c1e0d1a2b3c4d5e6f7a8b9c0d1e2.pdf');
   });
 
@@ -46,7 +47,10 @@ void main() {
   });
 
   test('auto format emits auto=format rather than fm', () {
-    final url = client.image(const SanityAssetRef('image-abc-800x600-jpg')).format(SanityImageFormat.auto).build();
+    final url = client
+        .image(const SanityAssetRef('image-abc-800x600-jpg'))
+        .format(SanityImageFormat.auto)
+        .build();
     expect(url.queryParameters, {'auto': 'format'});
   });
 
@@ -63,7 +67,8 @@ void main() {
 
   test('builds a file URL', () {
     final url = client.file(const SanityAssetRef('file-abc-pdf')).build();
-    expect(url.toString(), 'https://cdn.sanity.io/files/abc123/production/abc.pdf');
+    expect(url.toString(),
+        'https://cdn.sanity.io/files/abc123/production/abc.pdf');
   });
 
   test('rejects a malformed image reference', () {

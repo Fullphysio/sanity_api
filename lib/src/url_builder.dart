@@ -116,7 +116,9 @@ class SanityImageUrlBuilder {
 
   /// Sets the output format. [SanityImageFormat.auto] emits `auto=format`.
   SanityImageUrlBuilder format(SanityImageFormat value) =>
-      value == SanityImageFormat.auto ? _set('auto', 'format') : _set('fm', value.name);
+      value == SanityImageFormat.auto
+          ? _set('auto', 'format')
+          : _set('fm', value.name);
 
   /// Sets an arbitrary transform parameter not covered by the typed methods.
   SanityImageUrlBuilder param(String name, String value) => _set(name, value);

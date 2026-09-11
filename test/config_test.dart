@@ -59,13 +59,15 @@ void main() {
 
   group('requestTagPrefix', () {
     test('strips trailing dots', () {
-      final config = SanityConfig(projectId: 'p', apiVersion: '1', requestTagPrefix: 'app...');
+      final config = SanityConfig(
+          projectId: 'p', apiVersion: '1', requestTagPrefix: 'app...');
       expect(config.requestTagPrefix, 'app');
     });
 
     test('rejects an invalid prefix', () {
       expect(
-        () => SanityConfig(projectId: 'p', apiVersion: '1', requestTagPrefix: 'a b'),
+        () => SanityConfig(
+            projectId: 'p', apiVersion: '1', requestTagPrefix: 'a b'),
         throwsA(isA<ArgumentError>()),
       );
     });

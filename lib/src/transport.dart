@@ -96,16 +96,20 @@ class SanityTransport {
       overrides: headers,
     );
     final deadline = timeout ?? config.timeout;
-    final isRetriablePath = method == 'GET' || method == 'HEAD' || path.startsWith('data/query');
+    final isRetriablePath =
+        method == 'GET' || method == 'HEAD' || path.startsWith('data/query');
 
     var attempt = 0;
     while (true) {
       http.Response response;
       try {
-        final request = http.Request(method, Uri.parse(url))..headers.addAll(requestHeaders);
+        final request = http.Request(method, Uri.parse(url))
+          ..headers.addAll(requestHeaders);
         if (bodyBytes != null) request.bodyBytes = bodyBytes;
         final sent = _httpClient.send(request);
-        final streamed = deadline == Duration.zero ? await sent : await sent.timeout(deadline);
+        final streamed = deadline == Duration.zero
+            ? await sent
+            : await sent.timeout(deadline);
         response = await http.Response.fromStream(streamed);
       } on TimeoutException catch (error) {
         if (_shouldRetry(attempt, isRetriablePath, null)) {
@@ -156,7 +160,8 @@ class SanityTransport {
 
   String? _resolveTag(String? tag) {
     final prefix = config.requestTagPrefix;
-    final combined = tag != null && prefix != null ? '$prefix.$tag' : tag ?? prefix;
+    final combined =
+        tag != null && prefix != null ? '$prefix.$tag' : tag ?? prefix;
     return combined == null ? null : validateRequestTag(combined);
   }
 
@@ -188,15 +193,20 @@ class SanityTransport {
     required bool useCdn,
   }) {
     final base = useCdn && config.useCdn ? config.cdnUrl : config.url;
-    final buffer = StringBuffer('$base/${path.replaceFirst(RegExp(r'^/'), '')}');
+    final buffer =
+        StringBuffer('$base/${path.replaceFirst(RegExp(r'^/'), '')}');
     if (embeddedQueryString != null && embeddedQueryString.isNotEmpty) {
       buffer.write(embeddedQueryString);
     }
     if (query.isNotEmpty) {
-      final encoded =
-          query.entries.map((entry) => '${formUrlEncode(entry.key)}=${formUrlEncode(entry.value)}').join('&');
+      final encoded = query.entries
+          .map((entry) =>
+              '${formUrlEncode(entry.key)}=${formUrlEncode(entry.value)}')
+          .join('&');
       buffer.write(
-        embeddedQueryString != null && embeddedQueryString.isNotEmpty ? '&' : '?',
+        embeddedQueryString != null && embeddedQueryString.isNotEmpty
+            ? '&'
+            : '?',
       );
       buffer.write(encoded);
     }

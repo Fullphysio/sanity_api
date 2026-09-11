@@ -15,7 +15,8 @@ Future<void> main() async {
   );
   print('Found ${exercises.length} exercises');
 
-  final response = await client.fetchFull<Object?>('count(*[_type == "exercise"])');
+  final response =
+      await client.fetchFull<Object?>('count(*[_type == "exercise"])');
   print('Counted in ${response.ms}ms');
 
   client.close();

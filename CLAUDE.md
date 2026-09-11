@@ -1,13 +1,33 @@
 # Conventions
 
 This is a public package, so it does **not** follow the Fullphysio monorepo's
-no-comments rule.
+no-comments or 120-column rules.
 
 - `///` dartdoc is **required** on every exported symbol. pub.dev scores it and
   IDE hovers depend on it.
 - No comments on private implementation code. Name things properly instead.
-- Tests are required. `dart test` must pass before publishing.
-- Line width 120. `dart analyze` must be clean.
+- Formatting is stock `dart format` — **default width, no `--line-length`**.
+  That is what `pana` and pub.dev expect with zero configuration.
+  Note the Fullphysio machine's Dart is a custom Flutter-fork build whose
+  formatter can disagree with stable; CI runs official stable and is the arbiter.
+- `dart analyze --fatal-infos` must be clean.
+
+## Tests
+
+Two tiers:
+
+- **Unit and conformance** — the default `dart test` run. No network.
+- **Integration** (`test/integration/`) — hits the live Sanity API. Tagged
+  `integration` and skipped by default (see `dart_test.yaml`). Run them with:
+
+  ```
+  SANITY_TEST_PROJECT_ID=<id> SANITY_TEST_DATASET=<dataset> \
+    dart test --tags integration --run-skipped
+  ```
+
+  They skip themselves when those variables are unset, so a fresh checkout
+  passes. Assertions are structural — never assert on how much content a dataset
+  holds, or the suite rots.
 
 ## Conformance with @sanity/client
 
@@ -17,3 +37,26 @@ live HTTP server. When changing request construction, regenerate the fixtures
 against the same reference version rather than editing them by hand, and bump the
 version recorded in `THIRD_PARTY_NOTICES` and the README if you move to a newer
 upstream.
+
+## CI
+
+- `ci.yml` — format, analyze, `pub publish --dry-run`, then tests on the declared
+  SDK floor and stable, plus a `pana` job that fails if the pub.dev score drops
+  below maximum. Runs weekly too, to catch SDK and dependency drift.
+- `integration.yml` — live API tests on main, nightly and on demand. Deliberately
+  not on pull requests: an upstream outage must never block a merge.
+- `publish.yml` — releases on a `v<version>` tag via GitHub OIDC. No stored
+  credentials.
+
+## Releasing
+
+1. Bump `version:` in `pubspec.yaml` and add a `CHANGELOG.md` entry.
+2. Merge to `main` and let CI go green.
+3. Tag and push:
+
+   ```
+   git tag v1.2.3 && git push origin v1.2.3
+   ```
+
+Publishing is permanent: a version can be retracted within 7 days but never
+deleted, and the number is never reusable.

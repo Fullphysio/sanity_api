@@ -13,7 +13,8 @@ void main() {
 
   void matches(String name, SanityPatch patch) {
     test(name, () {
-      expect(patch.serialize(), golden[name], reason: 'diverges from JS client');
+      expect(patch.serialize(), golden[name],
+          reason: 'diverges from JS client');
     });
   }
 
@@ -37,7 +38,8 @@ void main() {
       ]));
   matches(
     'insertDouble',
-    SanityPatch(doc).insert(InsertLocation.before, 'a[0]', [1]).insert(InsertLocation.after, 'a[-1]', [2]),
+    SanityPatch(doc).insert(InsertLocation.before, 'a[0]', [1]).insert(
+        InsertLocation.after, 'a[-1]', [2]),
   );
   matches('spliceNoCount', SanityPatch(doc).splice('a', 2));
   matches(
@@ -63,7 +65,8 @@ void main() {
   );
   matches(
     'querySelection',
-    SanityPatch(const QuerySelection('*[_type=="x"]', params: {'t': 'x'})).set({'a': 1}),
+    SanityPatch(const QuerySelection('*[_type=="x"]', params: {'t': 'x'}))
+        .set({'a': 1}),
   );
   matches(
     'queryNoParams',
@@ -71,8 +74,10 @@ void main() {
   );
 
   test('key order matches the JS client for the insert merge quirk', () {
-    final serialized = (SanityPatch(doc).insert(InsertLocation.before, 'a[0]', [1]).insert(
-        InsertLocation.after, 'a[-1]', [2]).serialize()['insert']! as Map<String, Object?>);
+    final serialized = (SanityPatch(doc)
+            .insert(InsertLocation.before, 'a[0]', [1]).insert(
+                InsertLocation.after, 'a[-1]', [2]).serialize()['insert']!
+        as Map<String, Object?>);
     expect(serialized.keys.toList(), ['before', 'items', 'after']);
   });
 }

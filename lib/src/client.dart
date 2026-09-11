@@ -52,7 +52,8 @@ class SanityQueryResponse<T> {
 /// ```
 class SanityClient implements MutationExecutor {
   /// Creates a client for [config], optionally reusing [httpClient].
-  SanityClient(this.config, {http.Client? httpClient}) : _transport = SanityTransport(config, httpClient: httpClient);
+  SanityClient(this.config, {http.Client? httpClient})
+      : _transport = SanityTransport(config, httpClient: httpClient);
 
   /// The configuration in force.
   final SanityConfig config;
@@ -141,7 +142,8 @@ class SanityClient implements MutationExecutor {
 
     final queryParams = <String, String>{
       if (!returnQuery) 'returnQuery': 'false',
-      if (effectivePerspective != null) 'perspective': effectivePerspective.value,
+      if (effectivePerspective != null)
+        'perspective': effectivePerspective.value,
     };
 
     final decoded = await _transport.requestJson(
@@ -175,7 +177,8 @@ class SanityClient implements MutationExecutor {
     String? token,
     Duration? timeout,
   }) async {
-    final documents = await getDocuments([id], tag: tag, token: token, timeout: timeout);
+    final documents =
+        await getDocuments([id], tag: tag, token: token, timeout: timeout);
     return documents.first;
   }
 
@@ -227,7 +230,8 @@ class SanityClient implements MutationExecutor {
       query: options.toQueryParameters(),
       body: {
         'mutations': mutations,
-        if (options.transactionId != null) 'transactionId': options.transactionId,
+        if (options.transactionId != null)
+          'transactionId': options.transactionId,
       },
       tag: options.tag,
       token: options.token,
@@ -257,7 +261,8 @@ class SanityClient implements MutationExecutor {
     MutationOptions options = const MutationOptions(),
   }) =>
       SanityTransaction(executor: this).createIfNotExists(document).commit(
-            options: options.withDefaults(returnDocuments: true, returnFirst: true),
+            options:
+                options.withDefaults(returnDocuments: true, returnFirst: true),
           );
 
   /// Creates [document], replacing any existing document with that id.
@@ -266,7 +271,8 @@ class SanityClient implements MutationExecutor {
     MutationOptions options = const MutationOptions(),
   }) =>
       SanityTransaction(executor: this).createOrReplace(document).commit(
-            options: options.withDefaults(returnDocuments: true, returnFirst: true),
+            options:
+                options.withDefaults(returnDocuments: true, returnFirst: true),
           );
 
   /// Deletes everything matched by [selection].
@@ -297,7 +303,8 @@ class SanityClient implements MutationExecutor {
       delete(SanitySelection.query(query, params: params), options: options);
 
   /// Starts a patch against [selection], bound to this client.
-  SanityPatch patch(SanitySelection selection) => SanityPatch(selection, executor: this);
+  SanityPatch patch(SanitySelection selection) =>
+      SanityPatch(selection, executor: this);
 
   /// Starts a patch against the document [id], bound to this client.
   SanityPatch patchId(String id) => patch(SanitySelection.id(id));

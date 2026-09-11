@@ -65,7 +65,8 @@ void main() {
       final request = captured.single;
       expect(request.method, 'POST');
       expect(request.url.queryParameters.containsKey('query'), isFalse);
-      expect(jsonDecode(request.body), {'query': long, 'params': <String, Object?>{}});
+      expect(jsonDecode(request.body),
+          {'query': long, 'params': <String, Object?>{}});
     });
 
     test('the GET/POST boundary is strictly less-than', () async {
@@ -84,7 +85,8 @@ void main() {
   group('perspective', () {
     test('published stays on the CDN', () async {
       final client = clientFor(() => {'result': null});
-      await client.fetch<Object?>('*', perspective: SanityPerspective.published);
+      await client.fetch<Object?>('*',
+          perspective: SanityPerspective.published);
       expect(lastUri.host, 'abc123.apicdn.sanity.io');
       expect(lastUri.queryParameters['perspective'], 'published');
     });
@@ -106,9 +108,11 @@ void main() {
       final client = clientFor(() => {'result': null});
       await client.fetch<Object?>(
         '*',
-        perspective: SanityPerspective.stack(['summer-drop', 'drafts', 'published']),
+        perspective:
+            SanityPerspective.stack(['summer-drop', 'drafts', 'published']),
       );
-      expect(lastUri.queryParameters['perspective'], 'summer-drop,drafts,published');
+      expect(lastUri.queryParameters['perspective'],
+          'summer-drop,drafts,published');
       expect(lastUri.host, 'abc123.api.sanity.io');
     });
 
@@ -169,7 +173,8 @@ void main() {
 
   group('mutations', () {
     test('always POST to the origin API, never the CDN', () async {
-      final client = clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
+      final client =
+          clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
       await client.createOrReplace({'_id': 'foo', '_type': 'bar'});
 
       final request = captured.single;
@@ -179,7 +184,8 @@ void main() {
     });
 
     test('send the documented query parameters', () async {
-      final client = clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
+      final client =
+          clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
       await client.mutate(
         [
           {
@@ -202,7 +208,8 @@ void main() {
     });
 
     test('returnDocuments:false omits the parameter entirely', () async {
-      final client = clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
+      final client =
+          clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
       await client.mutate(
         [
           {
@@ -215,8 +222,13 @@ void main() {
     });
 
     test('a transaction defaults to not returning documents', () async {
-      final client = clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
-      await client.transaction().create({'_type': 'x'}).delete('old-doc').commit();
+      final client =
+          clientFor(() => {'transactionId': 't1', 'results': <Object?>[]});
+      await client
+          .transaction()
+          .create({'_type': 'x'})
+          .delete('old-doc')
+          .commit();
 
       expect(lastUri.queryParameters.containsKey('returnDocuments'), isFalse);
       expect(jsonDecode(captured.single.body), {
@@ -232,8 +244,12 @@ void main() {
     });
 
     test('a transaction id rides in the body', () async {
-      final client = clientFor(() => {'transactionId': 'tx-1', 'results': <Object?>[]});
-      await client.transaction().setTransactionId('tx-1').create({'_type': 'x'}).commit();
+      final client =
+          clientFor(() => {'transactionId': 'tx-1', 'results': <Object?>[]});
+      await client
+          .transaction()
+          .setTransactionId('tx-1')
+          .create({'_type': 'x'}).commit();
 
       final body = jsonDecode(captured.single.body) as Map<String, Object?>;
       expect(body['transactionId'], 'tx-1');
@@ -301,7 +317,8 @@ void main() {
       final client = clientFor(() => {
             'document': {'_id': 'file-1'},
           });
-      await client.assets.upload(SanityAssetType.file, Uint8List.fromList([1]), extract: []);
+      await client.assets
+          .upload(SanityAssetType.file, Uint8List.fromList([1]), extract: []);
       expect(lastUri.queryParameters['meta'], 'none');
       expect(lastUri.path, '/v2024-05-03/assets/files/production');
     });
@@ -318,7 +335,8 @@ void main() {
       final client = clientFor(() => {
             'document': {'_id': 'image-1', 'url': 'https://cdn'},
           });
-      final document = await client.assets.upload(SanityAssetType.image, Uint8List.fromList([1]));
+      final document = await client.assets
+          .upload(SanityAssetType.image, Uint8List.fromList([1]));
       expect(document, {'_id': 'image-1', 'url': 'https://cdn'});
     });
   });

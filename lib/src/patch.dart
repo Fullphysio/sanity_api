@@ -20,7 +20,8 @@ enum InsertLocation {
 /// [SanityTransaction] to batch it with others.
 class SanityPatch {
   /// Creates a patch against [selection].
-  SanityPatch(this.selection, {Map<String, Object?>? operations, MutationExecutor? executor})
+  SanityPatch(this.selection,
+      {Map<String, Object?>? operations, MutationExecutor? executor})
       : _operations = {...?operations},
         _executor = executor;
 
@@ -36,10 +37,12 @@ class SanityPatch {
   SanityPatch set(Map<String, Object?> attrs) => _assign('set', attrs);
 
   /// Sets [attrs] only where no value is currently present.
-  SanityPatch setIfMissing(Map<String, Object?> attrs) => _assign('setIfMissing', attrs);
+  SanityPatch setIfMissing(Map<String, Object?> attrs) =>
+      _assign('setIfMissing', attrs);
 
   /// Applies diff-match-patch deltas to string fields.
-  SanityPatch diffMatchPatch(Map<String, Object?> attrs) => _assign('diffMatchPatch', attrs);
+  SanityPatch diffMatchPatch(Map<String, Object?> attrs) =>
+      _assign('diffMatchPatch', attrs);
 
   /// Removes the attribute paths in [attrs]. Replaces any previous `unset`.
   SanityPatch unset(List<String> attrs) {
@@ -64,10 +67,12 @@ class SanityPatch {
   }
 
   /// Appends [items] to the array at [selector].
-  SanityPatch append(String selector, List<Object?> items) => insert(InsertLocation.after, '$selector[-1]', items);
+  SanityPatch append(String selector, List<Object?> items) =>
+      insert(InsertLocation.after, '$selector[-1]', items);
 
   /// Prepends [items] to the array at [selector].
-  SanityPatch prepend(String selector, List<Object?> items) => insert(InsertLocation.before, '$selector[0]', items);
+  SanityPatch prepend(String selector, List<Object?> items) =>
+      insert(InsertLocation.before, '$selector[0]', items);
 
   /// Removes [deleteCount] elements at [start] and inserts [items] there.
   ///
@@ -105,7 +110,8 @@ class SanityPatch {
   }
 
   /// A copy of this patch, sharing the executor but not the operations.
-  SanityPatch clone() => SanityPatch(selection, operations: _operations, executor: _executor);
+  SanityPatch clone() =>
+      SanityPatch(selection, operations: _operations, executor: _executor);
 
   /// The wire representation of this patch.
   Map<String, Object?> serialize() => {...selection.toJson(), ..._operations};

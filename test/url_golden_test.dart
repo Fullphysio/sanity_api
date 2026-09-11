@@ -76,7 +76,8 @@ void main() {
   );
   conforms(
     'specialChars',
-    (c) => c.fetch<Object?>(r'*[title == $q]', params: {'q': 'a b&c=d+e/f?g#h'}),
+    (c) =>
+        c.fetch<Object?>(r'*[title == $q]', params: {'q': 'a b&c=d+e/f?g#h'}),
   );
   conforms(
     'unicodeParam',
@@ -84,7 +85,8 @@ void main() {
   );
   conforms(
     'nullParam',
-    (c) => c.fetch<Object?>(r'*[a == $a && b == $b]', params: {'a': null, 'b': 1}),
+    (c) =>
+        c.fetch<Object?>(r'*[a == $a && b == $b]', params: {'a': null, 'b': 1}),
   );
   conforms(
     'nestedParam',

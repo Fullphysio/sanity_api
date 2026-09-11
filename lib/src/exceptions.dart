@@ -101,7 +101,9 @@ SanityRequestException buildRequestException({
     }
   }
 
-  final responseBody = isJson && body != null ? const JsonEncoder.withIndent('  ').convert(body) : rawBody;
+  final responseBody = isJson && body != null
+      ? const JsonEncoder.withIndent('  ').convert(body)
+      : rawBody;
 
   String fallback() => _httpErrorMessage(
         method: method,
@@ -134,7 +136,8 @@ SanityRequestException buildRequestException({
       final type = error['type'];
       final description = error['description'];
 
-      if ((type == 'mutationError' || type == 'actionError') && description is String) {
+      if ((type == 'mutationError' || type == 'actionError') &&
+          description is String) {
         final allItems = error['items'];
         final items = <String>[];
         if (allItems is List) {
@@ -157,7 +160,9 @@ SanityRequestException buildRequestException({
         }
         message = '$description$itemsStr';
         details = error;
-      } else if (type == 'queryParseError' && error['query'] is String && error['start'] is int) {
+      } else if (type == 'queryParseError' &&
+          error['query'] is String &&
+          error['start'] is int) {
         message = _formatQueryParseError(error, tag);
         details = error;
       } else if (description is String) {
@@ -215,9 +220,14 @@ String _httpErrorMessage({
   required String? statusMessage,
   required String? body,
 }) {
-  final details = body != null && body.isNotEmpty ? ' (${_sliceWithEllipsis(body, 100)})' : '';
-  final status = statusMessage != null && statusMessage.isNotEmpty ? ' $statusMessage' : '';
+  final details = body != null && body.isNotEmpty
+      ? ' (${_sliceWithEllipsis(body, 100)})'
+      : '';
+  final status = statusMessage != null && statusMessage.isNotEmpty
+      ? ' $statusMessage'
+      : '';
   return '$method-request to $url resulted in HTTP $statusCode$status$details';
 }
 
-String _sliceWithEllipsis(String value, int max) => value.length > max ? '${value.substring(0, max)}…' : value;
+String _sliceWithEllipsis(String value, int max) =>
+    value.length > max ? '${value.substring(0, max)}…' : value;

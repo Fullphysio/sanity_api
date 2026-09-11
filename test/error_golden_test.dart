@@ -32,7 +32,8 @@ void main() {
   void matches(String name, SanityRequestException exception) {
     test(name, () {
       final expected = golden[name]! as Map<String, Object?>;
-      expect(exception.message, expected['message'], reason: 'message diverges from JS client');
+      expect(exception.message, expected['message'],
+          reason: 'message diverges from JS client');
       expect(exception.statusCode, expected['statusCode']);
     });
   }
@@ -105,7 +106,8 @@ void main() {
   );
   matches(
     'nonJsonBody',
-    build(502, 'gateway blew up', contentType: 'text/plain', statusMessage: 'Bad Gateway'),
+    build(502, 'gateway blew up',
+        contentType: 'text/plain', statusMessage: 'Bad Gateway'),
   );
   matches(
     'emptyObject',

@@ -61,13 +61,15 @@ class MutationOptions {
 
   /// Returns a copy with [returnDocuments] and [returnFirst] defaulted when the
   /// caller left them unset.
-  MutationOptions withDefaults({bool? returnDocuments, bool? returnFirst}) => MutationOptions(
+  MutationOptions withDefaults({bool? returnDocuments, bool? returnFirst}) =>
+      MutationOptions(
         visibility: visibility,
         returnDocuments: this.returnDocuments ?? returnDocuments,
         returnFirst: this.returnFirst ?? returnFirst,
         dryRun: dryRun,
         autoGenerateArrayKeys: autoGenerateArrayKeys,
-        skipCrossDatasetReferenceValidation: skipCrossDatasetReferenceValidation,
+        skipCrossDatasetReferenceValidation:
+            skipCrossDatasetReferenceValidation,
         transactionId: transactionId,
         tag: tag,
         token: token,
@@ -80,9 +82,11 @@ class MutationOptions {
         'returnIds': 'true',
         if (returnDocuments != false) 'returnDocuments': 'true',
         'visibility': visibility.name,
-        if (autoGenerateArrayKeys != null) 'autoGenerateArrayKeys': '$autoGenerateArrayKeys',
+        if (autoGenerateArrayKeys != null)
+          'autoGenerateArrayKeys': '$autoGenerateArrayKeys',
         if (skipCrossDatasetReferenceValidation != null)
-          'skipCrossDatasetReferenceValidation': '$skipCrossDatasetReferenceValidation',
+          'skipCrossDatasetReferenceValidation':
+              '$skipCrossDatasetReferenceValidation',
       };
 }
 
@@ -167,13 +171,15 @@ class SanityMutationResult {
   final List<Map<String, Object?>> documents;
 
   /// Ids of every affected document, in mutation order.
-  List<String> get documentIds => results.map((result) => result.id).toList(growable: false);
+  List<String> get documentIds =>
+      results.map((result) => result.id).toList(growable: false);
 
   /// The first affected document id, or null when nothing matched.
   String? get documentId => results.isEmpty ? null : results.first.id;
 
   /// The first returned document, or null when none was returned.
-  Map<String, Object?>? get document => documents.isEmpty ? null : documents.first;
+  Map<String, Object?>? get document =>
+      documents.isEmpty ? null : documents.first;
 }
 
 /// Implemented by the client so patches and transactions can commit themselves.

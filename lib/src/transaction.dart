@@ -31,7 +31,8 @@ class SanityTransaction {
   }
 
   /// Creates [document], letting the API assign an id when `_id` is absent.
-  SanityTransaction create(Map<String, Object?> document) => _add({'create': document});
+  SanityTransaction create(Map<String, Object?> document) =>
+      _add({'create': document});
 
   /// Creates [document] unless a document with that id already exists.
   SanityTransaction createIfNotExists(Map<String, Object?> document) {
@@ -54,7 +55,8 @@ class SanityTransaction {
   }
 
   /// Adds [patch] to the transaction.
-  SanityTransaction patch(SanityPatch patch) => _add({'patch': patch.serialize()});
+  SanityTransaction patch(SanityPatch patch) =>
+      _add({'patch': patch.serialize()});
 
   /// Builds a patch against [selection] via [build] and adds it.
   SanityTransaction patchSelection(
@@ -86,7 +88,8 @@ class SanityTransaction {
       );
 
   /// The queued mutations, in order.
-  List<Map<String, Object?>> serialize() => List.unmodifiable(_operations.map(Map<String, Object?>.from));
+  List<Map<String, Object?>> serialize() =>
+      List.unmodifiable(_operations.map(Map<String, Object?>.from));
 
   /// Alias of [serialize].
   List<Map<String, Object?>> toJson() => serialize();
@@ -112,7 +115,8 @@ class SanityTransaction {
             returnFirst: options.returnFirst,
             dryRun: options.dryRun,
             autoGenerateArrayKeys: options.autoGenerateArrayKeys,
-            skipCrossDatasetReferenceValidation: options.skipCrossDatasetReferenceValidation,
+            skipCrossDatasetReferenceValidation:
+                options.skipCrossDatasetReferenceValidation,
             transactionId: _transactionId,
             tag: options.tag,
             token: options.token,

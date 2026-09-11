@@ -26,7 +26,8 @@ void main() {
     expect(getVersionId('foo', 'summer'), 'versions.summer.foo');
     expect(getVersionId('drafts.foo', 'summer'), 'versions.summer.foo');
     expect(() => getVersionId('foo', 'drafts'), throwsA(isA<ArgumentError>()));
-    expect(() => getVersionId('foo', 'published'), throwsA(isA<ArgumentError>()));
+    expect(
+        () => getVersionId('foo', 'published'), throwsA(isA<ArgumentError>()));
   });
 
   test('extracts the release name', () {

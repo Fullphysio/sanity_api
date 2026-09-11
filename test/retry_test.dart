@@ -24,7 +24,8 @@ void main() {
       ),
       httpClient: MockClient((request) async {
         log?.add(request);
-        final status = statuses[call < statuses.length ? call : statuses.length - 1];
+        final status =
+            statuses[call < statuses.length ? call : statuses.length - 1];
         call++;
         return http.Response(
           jsonEncode({'result': null}),
@@ -61,7 +62,8 @@ void main() {
     final client = clientFor([503], maxRetries: 2, log: log);
     await expectLater(
       client.fetch<Object?>('*'),
-      throwsA(isA<SanityServerException>().having((error) => error.statusCode, 'statusCode', 503)),
+      throwsA(isA<SanityServerException>()
+          .having((error) => error.statusCode, 'statusCode', 503)),
     );
     expect(log, hasLength(3));
   });

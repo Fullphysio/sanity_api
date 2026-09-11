@@ -9,7 +9,8 @@ sealed class SanitySelection {
   const factory SanitySelection.ids(List<String> ids) = DocumentIdsSelection;
 
   /// Selects every document matching the GROQ filter [query].
-  const factory SanitySelection.query(String query, {Map<String, Object?>? params}) = QuerySelection;
+  const factory SanitySelection.query(String query,
+      {Map<String, Object?>? params}) = QuerySelection;
 
   /// The wire representation merged into the mutation.
   Map<String, Object?> toJson();

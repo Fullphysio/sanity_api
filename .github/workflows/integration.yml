@@ -1,0 +1,32 @@
+name: Integration
+
+# Exercises the real Sanity HTTP API. Kept off pull requests so an upstream
+# outage can never block a merge; it runs on main, nightly, and on demand.
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+env:
+  PUB_ENVIRONMENT: bot.github
+
+jobs:
+  live:
+    name: Live API
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d
+        with:
+          sdk: stable
+      - run: dart pub get
+      - name: Run integration tests
+        env:
+          # Public, read-only dataset. Not secrets: a Sanity project id appears
+          # in every CDN URL. The tests skip themselves when these are unset,
+          # so forks and contributors are never blocked.
+          SANITY_TEST_PROJECT_ID: ${{ vars.SANITY_TEST_PROJECT_ID }}
+          SANITY_TEST_DATASET: ${{ vars.SANITY_TEST_DATASET }}
+        run: dart test --tags integration --run-skipped

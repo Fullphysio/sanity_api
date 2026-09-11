@@ -44,11 +44,13 @@ class SanityConfig {
     }
     if (dataset != null) validateDataset(dataset);
 
-    final normalizedPrefix = (requestTagPrefix == null || requestTagPrefix.isEmpty)
+    final normalizedPrefix = (requestTagPrefix == null ||
+            requestTagPrefix.isEmpty)
         ? null
         : validateRequestTag(requestTagPrefix).replaceAll(_trailingDots, '');
 
-    final normalizedApiVersion = apiVersion.startsWith('v') ? apiVersion.substring(1) : apiVersion;
+    final normalizedApiVersion =
+        apiVersion.startsWith('v') ? apiVersion.substring(1) : apiVersion;
     _validateApiVersion(normalizedApiVersion);
 
     if (apiVersion == '1') {
@@ -202,7 +204,8 @@ class SanityConfig {
 
 void _validateApiVersion(String apiVersion) {
   if (apiVersion == '1' || apiVersion == 'X') return;
-  if (!_apiVersionDatePattern.hasMatch(apiVersion) || !_isRealDate(apiVersion)) {
+  if (!_apiVersionDatePattern.hasMatch(apiVersion) ||
+      !_isRealDate(apiVersion)) {
     throw ArgumentError(
       'Invalid API version string, expected `1` or date in format `YYYY-MM-DD`',
     );
@@ -216,4 +219,5 @@ bool _isRealDate(String value) {
   return parsed.millisecondsSinceEpoch > 0;
 }
 
-Duration _defaultRetryDelay(int attempt) => Duration(milliseconds: 100 * (1 << attempt));
+Duration _defaultRetryDelay(int attempt) =>
+    Duration(milliseconds: 100 * (1 << attempt));

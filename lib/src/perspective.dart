@@ -7,17 +7,21 @@ class SanityPerspective {
   const SanityPerspective._(this._values, {required this.isStack});
 
   /// Every document, drafts and published alike, exactly as stored.
-  static const SanityPerspective raw = SanityPerspective._(['raw'], isStack: false);
+  static const SanityPerspective raw =
+      SanityPerspective._(['raw'], isStack: false);
 
   /// Only published documents.
-  static const SanityPerspective published = SanityPerspective._(['published'], isStack: false);
+  static const SanityPerspective published =
+      SanityPerspective._(['published'], isStack: false);
 
   /// Drafts overlaid on published documents.
-  static const SanityPerspective drafts = SanityPerspective._(['drafts'], isStack: false);
+  static const SanityPerspective drafts =
+      SanityPerspective._(['drafts'], isStack: false);
 
   /// Former name of [drafts].
   @Deprecated('Renamed to `drafts`; will be removed in a future API version')
-  static const SanityPerspective previewDrafts = SanityPerspective._(['previewDrafts'], isStack: false);
+  static const SanityPerspective previewDrafts =
+      SanityPerspective._(['previewDrafts'], isStack: false);
 
   /// Layers [perspectives] — release ids, `drafts` and `published` — highest
   /// precedence first.
@@ -44,13 +48,18 @@ class SanityPerspective {
 
   /// Whether using this perspective forces a request off the CDN.
   bool get forcesCdnOff =>
-      (isStack && _values.isNotEmpty) || _values.first == 'drafts' || _values.first == 'previewDrafts';
+      (isStack && _values.isNotEmpty) ||
+      _values.first == 'drafts' ||
+      _values.first == 'previewDrafts';
 
   @override
   String toString() => value;
 
   @override
-  bool operator ==(Object other) => other is SanityPerspective && other.isStack == isStack && other.value == value;
+  bool operator ==(Object other) =>
+      other is SanityPerspective &&
+      other.isStack == isStack &&
+      other.value == value;
 
   @override
   int get hashCode => Object.hash(value, isStack);

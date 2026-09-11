@@ -41,7 +41,9 @@ String codeFrame(String query, int start, int? end, [String? message]) {
     var markerLine = '';
     if (hasMarker is List<int>) {
       final cut = hasMarker[0] - 1 < 0 ? 0 : hasMarker[0] - 1;
-      final markerSpacing = line.substring(0, cut > line.length ? line.length : cut).replaceAll(RegExp(r'[^\t]'), ' ');
+      final markerSpacing = line
+          .substring(0, cut > line.length ? line.length : cut)
+          .replaceAll(RegExp(r'[^\t]'), ' ');
       final numberOfMarkers = hasMarker[1] == 0 ? 1 : hasMarker[1];
       markerLine = [
         '\n ',

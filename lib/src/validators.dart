@@ -1,10 +1,13 @@
 const List<String> _validAssetTypes = ['image', 'file'];
 const List<String> _validInsertLocations = ['before', 'after', 'replace'];
 
-final RegExp _datasetPattern = RegExp(r'^(~[a-z0-9]{1}[-\w]{0,63}|[a-z0-9]{1}[-\w]{0,63})$');
+final RegExp _datasetPattern =
+    RegExp(r'^(~[a-z0-9]{1}[-\w]{0,63}|[a-z0-9]{1}[-\w]{0,63})$');
 final RegExp _projectIdPattern = RegExp(r'^[-a-z0-9]+$', caseSensitive: false);
-final RegExp _documentIdPattern = RegExp(r'^[a-z0-9_][a-z0-9_.-]{0,127}$', caseSensitive: false);
-final RegExp _requestTagPattern = RegExp(r'^[a-z0-9._-]{1,75}$', caseSensitive: false);
+final RegExp _documentIdPattern =
+    RegExp(r'^[a-z0-9_][a-z0-9_.-]{0,127}$', caseSensitive: false);
+final RegExp _requestTagPattern =
+    RegExp(r'^[a-z0-9._-]{1,75}$', caseSensitive: false);
 
 /// Validates a dataset name, throwing [ArgumentError] when malformed.
 void validateDataset(String name) {
@@ -19,7 +22,8 @@ void validateDataset(String name) {
 /// Validates a project id, throwing [ArgumentError] when malformed.
 void validateProjectId(String id) {
   if (!_projectIdPattern.hasMatch(id)) {
-    throw ArgumentError('`projectId` can only contain only a-z, 0-9 and dashes');
+    throw ArgumentError(
+        '`projectId` can only contain only a-z, 0-9 and dashes');
   }
 }
 
@@ -69,7 +73,8 @@ void requireDocumentType(String op, Map<String, Object?> document) {
 }
 
 /// Asserts that [documentId], when present, matches [builtVersionId].
-void validateVersionIdMatch(String builtVersionId, Map<String, Object?> document) {
+void validateVersionIdMatch(
+    String builtVersionId, Map<String, Object?> document) {
   final id = document['_id'];
   if (id != null && id != builtVersionId) {
     throw ArgumentError(
@@ -84,7 +89,8 @@ void validateInsert(String at, String selector, List<Object?> items) {
   const signature = 'insert(at, selector, items)';
   if (!_validInsertLocations.contains(at)) {
     final valid = _validInsertLocations.map((loc) => '"$loc"').join(', ');
-    throw ArgumentError('$signature takes an "at"-argument which is one of: $valid');
+    throw ArgumentError(
+        '$signature takes an "at"-argument which is one of: $valid');
   }
 }
 
