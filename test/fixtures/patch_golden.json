@@ -1,0 +1,154 @@
+{
+  "set": {
+    "id": "doc1",
+    "set": {
+      "title": "A",
+      "nested.prop": 1
+    }
+  },
+  "setThenSet": {
+    "id": "doc1",
+    "set": {
+      "a": 1,
+      "b": 2
+    }
+  },
+  "setIfMissing": {
+    "id": "doc1",
+    "setIfMissing": {
+      "a": 1
+    }
+  },
+  "unsetTwice": {
+    "id": "doc1",
+    "unset": [
+      "b",
+      "c"
+    ]
+  },
+  "incDec": {
+    "id": "doc1",
+    "inc": {
+      "n": 1
+    },
+    "dec": {
+      "m": 2
+    }
+  },
+  "ifRev": {
+    "id": "doc1",
+    "set": {
+      "a": 1
+    },
+    "ifRevisionID": "rev1"
+  },
+  "append": {
+    "id": "doc1",
+    "insert": {
+      "after": "comments[-1]",
+      "items": [
+        {
+          "x": 1
+        }
+      ]
+    }
+  },
+  "prepend": {
+    "id": "doc1",
+    "insert": {
+      "before": "comments[0]",
+      "items": [
+        {
+          "x": 1
+        }
+      ]
+    }
+  },
+  "insertDouble": {
+    "id": "doc1",
+    "insert": {
+      "before": "a[0]",
+      "items": [
+        2
+      ],
+      "after": "a[-1]"
+    }
+  },
+  "spliceNoCount": {
+    "id": "doc1",
+    "insert": {
+      "replace": "a[2:-1]",
+      "items": []
+    }
+  },
+  "spliceCount": {
+    "id": "doc1",
+    "insert": {
+      "replace": "a[2:5]",
+      "items": [
+        9
+      ]
+    }
+  },
+  "spliceNegStart": {
+    "id": "doc1",
+    "insert": {
+      "replace": "a[-3:]",
+      "items": [
+        9
+      ]
+    }
+  },
+  "spliceNegStartAll": {
+    "id": "doc1",
+    "insert": {
+      "replace": "a[-3:-1]",
+      "items": []
+    }
+  },
+  "spliceZero": {
+    "id": "doc1",
+    "insert": {
+      "replace": "a[0:0]",
+      "items": [
+        9
+      ]
+    }
+  },
+  "spliceMinusOne": {
+    "id": "doc1",
+    "insert": {
+      "replace": "a[1:-1]",
+      "items": [
+        9
+      ]
+    }
+  },
+  "idsSelection": {
+    "query": "*[_id in $ids]",
+    "params": {
+      "ids": [
+        "d1",
+        "d2"
+      ]
+    },
+    "set": {
+      "a": 1
+    }
+  },
+  "querySelection": {
+    "query": "*[_type==\"x\"]",
+    "params": {
+      "t": "x"
+    },
+    "set": {
+      "a": 1
+    }
+  },
+  "queryNoParams": {
+    "query": "*[_type==\"x\"]",
+    "set": {
+      "a": 1
+    }
+  }
+}

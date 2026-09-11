@@ -1,0 +1,42 @@
+{
+  "boomStyle": {
+    "message": "Unauthorized - Session not found",
+    "statusCode": 401
+  },
+  "errorStringOnly": {
+    "message": "Some plain error",
+    "statusCode": 400
+  },
+  "messageOnly": {
+    "message": "Just a message",
+    "statusCode": 400
+  },
+  "mutationError": {
+    "message": "Mutation failed:\n- Document a not found\n- Document b not found",
+    "statusCode": 409
+  },
+  "mutationErrorTruncated": {
+    "message": "Mutation failed:\n- item 0\n- item 1\n- item 2\n- item 3\n- item 4\n...and 3 more",
+    "statusCode": 409
+  },
+  "queryParseError": {
+    "message": "GROQ query parse error:\n> 1 | *[_type == \"exercise\"\n    |                     ^\n> 2 |   && bad]\n    | ^^ unexpected token\n\nTag: fullphysio.test",
+    "statusCode": 400
+  },
+  "descriptionOnly": {
+    "message": "Dataset not found",
+    "statusCode": 400
+  },
+  "nonJsonBody": {
+    "message": "GET-request to https://abc123.api.sanity.io/v2024-05-03/data/query/production resulted in HTTP 502 Bad Gateway (gateway blew up)",
+    "statusCode": 502
+  },
+  "emptyObject": {
+    "message": "GET-request to https://abc123.api.sanity.io/v2024-05-03/data/query/production resulted in HTTP 418 I'm a teapot",
+    "statusCode": 418
+  },
+  "serverError": {
+    "message": "Internal error",
+    "statusCode": 500
+  }
+}

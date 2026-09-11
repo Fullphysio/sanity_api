@@ -1,0 +1,74 @@
+{
+  "plain": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5B_type+%3D%3D+%22exercise%22%5D&returnQuery=false"
+  },
+  "params": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5B_type+%3D%3D+%24t+%26%26+n+%3D%3D+%24n%5D&%24t=%22exercise%22&%24n=3&returnQuery=false"
+  },
+  "listParam": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5B_id+in+%24ids%5D&%24ids=%5B%22a%22%2C%22b%22%5D&returnQuery=false"
+  },
+  "specialChars": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5Btitle+%3D%3D+%24q%5D&%24q=%22a+b%26c%3Dd%2Be%2Ff%3Fg%23h%22&returnQuery=false"
+  },
+  "unicodeParam": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5Bt+%3D%3D+%24t%5D&%24t=%22%C3%A9%C3%A0%C3%BC+%E4%B8%AD%E6%96%87%22&returnQuery=false"
+  },
+  "nullParam": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5Ba+%3D%3D+%24a+%26%26+b+%3D%3D+%24b%5D&%24a=null&%24b=1&returnQuery=false"
+  },
+  "nestedParam": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5Ba+%3D%3D+%24o%5D&%24o=%7B%22x%22%3A%5B1%2C%7B%22y%22%3A%22z%22%7D%5D%7D&returnQuery=false"
+  },
+  "boolParam": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*%5Ba+%3D%3D+%24b%5D&%24b=true&returnQuery=false"
+  },
+  "perspectivePublished": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*&returnQuery=false&perspective=published"
+  },
+  "perspectiveDrafts": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*&returnQuery=false&perspective=drafts"
+  },
+  "perspectiveStack": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*&returnQuery=false&perspective=r1%2Cdrafts"
+  },
+  "tagged": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/query/production?query=*&returnQuery=false&tag=my-tag"
+  },
+  "getDocument": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/doc/production/doc1"
+  },
+  "getDocuments": {
+    "method": "GET",
+    "target": "/v2024-05-03/data/doc/production/doc1,doc2"
+  },
+  "mutateCreate": {
+    "method": "POST",
+    "target": "/v2024-05-03/data/mutate/production?returnIds=true&returnDocuments=true&visibility=sync"
+  },
+  "mutateDelete": {
+    "method": "POST",
+    "target": "/v2024-05-03/data/mutate/production?returnIds=true&returnDocuments=true&visibility=sync"
+  },
+  "mutateTransaction": {
+    "method": "POST",
+    "target": "/v2024-05-03/data/mutate/production?returnIds=true&visibility=sync"
+  },
+  "mutateDryRun": {
+    "method": "POST",
+    "target": "/v2024-05-03/data/mutate/production?dryRun=true&returnIds=true&returnDocuments=true&visibility=async&autoGenerateArrayKeys=true"
+  }
+}
