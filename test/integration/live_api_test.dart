@@ -14,10 +14,12 @@ import 'package:test/test.dart';
 /// passes. Every assertion is structural: nothing here depends on how much
 /// content the dataset happens to hold.
 void main() {
-  final projectId = Platform.environment['SANITY_TEST_PROJECT_ID'];
-  final dataset = Platform.environment['SANITY_TEST_DATASET'];
+  // GitHub Actions supplies an empty string for a variable that is not defined,
+  // so absence has to be treated the same as blank.
+  final projectId = Platform.environment['SANITY_TEST_PROJECT_ID'] ?? '';
+  final dataset = Platform.environment['SANITY_TEST_DATASET'] ?? '';
 
-  if (projectId == null || dataset == null) {
+  if (projectId.isEmpty || dataset.isEmpty) {
     test('live API', () {}, skip: 'SANITY_TEST_PROJECT_ID/DATASET not set');
     return;
   }
