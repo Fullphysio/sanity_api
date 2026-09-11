@@ -1,9 +1,9 @@
 name: sanity_api
 description: >-
-  Pure Dart client for the Sanity.io Content Lake API. Run GROQ queries, create
-  and patch documents, commit transactions and upload assets, from Dart servers,
-  CLIs and Flutter apps alike. No Flutter dependency.
-version: 0.1.0
+  Pure Dart client for the Sanity.io Content Lake: GROQ queries, document
+  mutations, transactions and asset uploads. Runs on Dart servers, CLIs and
+  Flutter apps.
+version: 0.1.1
 repository: https://github.com/Fullphysio/sanity_api
 issue_tracker: https://github.com/Fullphysio/sanity_api/issues
 
