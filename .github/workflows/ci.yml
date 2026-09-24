@@ -17,7 +17,7 @@ jobs:
     name: Format & analyze
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d
         with:
           sdk: stable
@@ -43,7 +43,7 @@ jobs:
         # The floor declared in pubspec.yaml, plus current stable.
         sdk: ['3.6', stable]
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: dart-lang/setup-dart@6afc89df92d6eb3834022f73cd65adc8cdfcb92d
         with:
           sdk: ${{ matrix.sdk }}
@@ -58,7 +58,7 @@ jobs:
     needs: analyze
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       # pana evaluates Flutter platform support, so it needs the Flutter SDK
       # to reproduce the score pub.dev will compute.
       - uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
