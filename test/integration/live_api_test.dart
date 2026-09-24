@@ -59,8 +59,10 @@ void main() {
   test(
       'falls back to POST for a query over the size limit, with the same '
       'result as GET', () async {
+    // The padding sits in a GROQ comment so it lengthens the request without
+    // costing the server anything: a filter against it scans every document.
     final padding = 'x' * 12000;
-    final long = 'count(*[_type != "$padding"])';
+    final long = 'count(*[]) // $padding';
     expect(long.length, greaterThan(getQuerySizeLimit));
 
     final viaPost = await client.fetch<int>(long);
