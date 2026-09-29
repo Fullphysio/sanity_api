@@ -1,8 +1,13 @@
 # sanity_api
 
+[![pub package](https://img.shields.io/pub/v/sanity_api.svg)](https://pub.dev/packages/sanity_api)
+[![CI](https://github.com/Fullphysio/sanity_api/actions/workflows/ci.yml/badge.svg)](https://github.com/Fullphysio/sanity_api/actions/workflows/ci.yml)
+
 A pure Dart client for the [Sanity.io](https://www.sanity.io) Content Lake. Query with GROQ, create and patch documents, commit transactions, and upload assets — from Dart servers, CLI tools, Cloud Functions and Flutter apps alike.
 
 **No Flutter dependency.** Existing Dart Sanity packages either declare the Flutter SDK — which pub refuses to resolve inside a plain Dart project — or are read-only. This one is neither.
+
+Used in production at [Fullphysio](https://www.fullphysio.com), where it runs inside our Dart Cloud Functions. Bug reports are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ```dart
 import 'package:sanity_api/sanity_api.dart';
