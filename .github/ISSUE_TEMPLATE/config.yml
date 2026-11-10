@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Sanity API reference
+    url: https://www.sanity.io/docs/http-api
+    about: What the Sanity API accepts and returns. Questions about Sanity itself go to Sanity support.
